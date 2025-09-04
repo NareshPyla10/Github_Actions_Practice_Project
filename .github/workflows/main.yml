@@ -1,0 +1,26 @@
+name: Running the Project with Github Actions
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  running_the_project_with_github_actions:
+    name: Running the Project with Github Actions
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Github Repository
+        uses: actions/checkout@v4
+
+      - name: Install java and maven
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven   
+
+      - name: Running the Project with Github Actions
+        run: mvn clean compile test -DsuiteXmlFile='TestNGXMLFiles/Login.xml'
